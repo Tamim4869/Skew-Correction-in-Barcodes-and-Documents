@@ -4,9 +4,6 @@ from scipy import ndimage
 from statistics import variance as varn
 import time
 
-import os
-os.chdir('C:\\Users\Tamim\Stat Project Codes\Input Images')
-
 start=time.time()
 
 def triplet(a,b,c, thres):
@@ -15,7 +12,7 @@ def triplet(a,b,c, thres):
     else:
         return 0
 
-image=plt.imread('barcode155.jpeg')
+image=plt.imread('barcodeimage')
 
 p,q,r=image.shape
 Z=np.zeros((p,q), dtype=np.int32)
@@ -31,8 +28,8 @@ else:
 
 plt.imshow(Z, cmap='gray', interpolation='hanning')
 plt.axis('off')
-plt.savefig('rewritten8.jpg', bbox_inches='tight')
-img=plt.imread('rewritten8.jpg')
+plt.savefig('Rewritten.jpg', bbox_inches='tight')
+img=plt.imread('Rewritten.jpg')
 
 def function(image):
     grayimg=np.dot(image[...,:3],[1/2, 1/4 , 1/4])
@@ -74,7 +71,6 @@ plt.show()
 end=time.time()
     
 print('Skew about the positive X-axis is about :', 90-m, 'degrees')
-print(min(fnlist), max(fnlist))
 print(end-start)
 
 
