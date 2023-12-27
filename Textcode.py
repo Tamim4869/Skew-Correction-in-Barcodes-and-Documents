@@ -4,9 +4,6 @@ from scipy import ndimage
 from statistics import variance as varn
 import time
 
-import os
-os.chdir('C:\\Users\Tamim\Stat Project Codes\Input Images')
-
 start=time.time()
 
 def triplet(a,b,c, thres):
@@ -15,7 +12,7 @@ def triplet(a,b,c, thres):
     else:
         return 0
 
-image=plt.imread('text28.jpeg')
+image=plt.imread('textimage')
 
 p,q,r=image.shape
 Z=np.zeros((p,q), dtype=np.int32)
@@ -31,8 +28,8 @@ else:
 
 plt.imshow(Z, cmap='gray', interpolation='hanning')
 plt.axis('off')
-plt.savefig('rewritten8.jpg', bbox_inches='tight')
-img=plt.imread('rewritten8.jpg')
+plt.savefig('Rewritten.jpg', bbox_inches='tight')
+img=plt.imread('Rewritten.jpg')
 
 def function(image):
     grayimg=np.dot(image[...,:3],[1/2, 1/4 , 1/4])
@@ -57,13 +54,13 @@ fnlist=[countvar(img, 0.5*angle, thres1,thres2) for angle in range(0,360)]
 B=max(fnlist)
 m= 0.5*fnlist.index(B)
 
-def adjust(angle):
+def adjust1(angle):
     if angle <= 90:
         return angle
     else:
         return angle + 180
 
-def thikangle(angle):
+def adjust2(angle):
     if angle <= 90:
         return -angle
     else:
@@ -71,12 +68,12 @@ def thikangle(angle):
 
 fig, ax = plt.subplots(ncols=2, figsize=(20, 20))
 ax[0].imshow(image, cmap='gray')
-ax[1].imshow(ndimage.rotate(image, adjust(m)), cmap='gray')
+ax[1].imshow(ndimage.rotate(image, adjust1(m)), cmap='gray')
 plt.show()
 
 end=time.time()
 
-print('Skew about the positive X-axis is about :', thikangle(m), 'degrees')
+print('Skew about the positive X-axis is about :', adjust2(m), 'degrees')
 print(end-start)
 
 
